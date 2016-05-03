@@ -21,3 +21,10 @@
 
 	git push 工程名 master
 	
+>3.在将本地的文件上传至GitHub中时，需要注意确认GitHub已经和本地的Git相关联，否则无法正常push,初次push时，可以通过如下指令进行关联：<br>
+	
+	git remote add 工程名 git@github.com:账号名/本地工程名.git
+
+	git push -u 工程名 master
+
+其中第一条指令表示将GitHub中的工程与本地的工程相关联，<br>第二条指令中的“-u”不但会把本地的master分支内容推送到远程新的master分支，同时还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化指令。
