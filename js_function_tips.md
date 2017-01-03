@@ -132,3 +132,48 @@ _tip:使用此方法设置分享内容时，务必保证已经实现微信分享
 	* "jsonp": JSONP 格式。使用 JSONP 形式调用函数时，如 "myurl?callback=?" jQuery 将自动替换 ? 为正确的函数名，以执行回调函数。
 	* "text": 返回纯文本字符串
 * success、error分别表示ajax的响应服务器的成功和错误对应事件。
+
+>4.javascript对URL字符串进行编码/解码。
+
+只有字母和数字[0-9a-zA-Z]、一些特殊符号“$-_.+!*'(),”[不包括双引号]、以及某些保留字，才可以不经过编码直接用于URL。
+
+关于URL编码，在js中有三个相关的函数，分别是escape(),encodeURI(),encodeURIComponent().
+
+* escape()编码方法，对应的解码方法为unescape().
+	* eascape方法： 返回一个可在所有计算机上读取的编码String对象。
+	* 不会被此方法编码的字符： * @ - _ + . / 
+	* 实际上，escape()不能直接用于URL编码，它的真正作用是返回一个字符的Unicode编码值。比如“春节”的返回结果 是%u6625%u8282，也就是说在Unicode字符集中，“春”是第6625个（十六进制）字符，“节”是第8282个（十六进制）字符。
+	* 它的具体规则是，除了ASCII字母、数字、标点符号“@ * _ + - . /”以外，对其他所有字符进行编码。在\u0000到\u00ff之间的符号被转成%xx的形式，其余符号被转成%uxxxx的形式。
+	* 无论网页的原始编码是什么，一旦被Javascript编码，就都变为unicode字符。也就是说，Javascipt函数的输入和输出，默认都是Unicode字符。
+* encodeURI()编码方法，对应的解码方法为decodeURI().
+	* encodeURI 方法：返回编码为有效的统一资源标识符 (URI) 的字符串。
+	* 不会被此方法编码的字符：! @ # $ & * ( ) = : / ; ? + '
+	* encodeURI()是Javascript中真正用来对URL编码的函数。
+	* 它着眼于对整个URL进行编码，因此除了常见的符号以外，对其他一些在网址中有特殊含义的符号"; / ? : @ & = + $ , #"共11个 ，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
+* encodeURIComponent()编码方法，对应的解码方法为decodeURIComponent().
+	* 与encodeURI()的区别是，它用于对URL的组成部分进行个别编码，而不用于对整个URL进行编码。
+	* 因此，“; / ? : @ & = + $ , #”，这些在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码。至于具体的编码方法，两者是一样。
+
+参考示例如下：
+
+	(function(){
+		var url = "http://www.google.com?a='这里是中文'&b=2";	
+		//三种编码
+		console.log("escape:" + escape(url));
+		console.log("encodeURI:" + encodeURI(url));
+		console.log("encodeURIComponent:" + encodeURIComponent(url));
+	})();
+	//输出如下：
+	escape:http%3A//www.google.com%3Fa%3D%27%u8FD9%u91CC%u662F%u4E2D%u6587%27%26b%3D2
+	encodeURI:http://www.google.com?a='%E8%BF%99%E9%87%8C%E6%98%AF%E4%B8%AD%E6%96%87'&b=2
+	encodeURIComponent:http%3A%2F%2Fwww.google.com%3Fa%3D'%E8%BF%99%E9%87%8C%E6%98%AF%E4%B8%AD%E6%96%87'%26b%3D2
+
+_此模块参考如下网站：<br>
+[W3School.com-escape()函数](http://www.w3school.com.cn/jsref/jsref_escape.asp)<br>
+[W3School.com-encodeURI()函数](http://www.w3school.com.cn/jsref/jsref_encodeuri.asp)<br>
+[W3School.com-encodeURIComponent()函数](http://www.w3school.com.cn/jsref/jsref_encodeURIComponent.asp)<br>
+[博客园-JS对URL字符串进行编码/解码分析](http://www.cnblogs.com/liuhongfeng/p/5012570.html?utm_source=tuicool&utm_medium=referral)<br>_
+
+
+	
+	
