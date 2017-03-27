@@ -1,5 +1,6 @@
-#Git - GitHub常用技巧
-######整理者：hauk0101
+# Git - GitHub常用技巧
+###### 整理者：hauk0101
+
 >1.如何在GitHub账号中创建新工程目录，并在本地克隆对应的目录？
 
 步骤1：在GitHub下使用New repository创建新的工程目录，并设置需要的目录名称。<br>
