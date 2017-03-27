@@ -174,6 +174,45 @@ _此模块参考如下网站：<br>
 [W3School.com-encodeURIComponent()函数](http://www.w3school.com.cn/jsref/jsref_encodeURIComponent.asp)<br>
 [博客园-JS对URL字符串进行编码/解码分析](http://www.cnblogs.com/liuhongfeng/p/5012570.html?utm_source=tuicool&utm_medium=referral)<br>_
 
+>5.使用jQuery对html元素循环添加事件。
 
+解决方法如下：
 	
+	<!-- 以下内容可直接在浏览器中运行，在调试窗口console下可查看输出结果 -->
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>利用jQuery循环添加点击事件</title>
+		</head>
+		<body>
+			<div class="demo-click">点我试试 1</div>
+			<div class="demo-click">点我试试 2</div>
+			<div class="demo-click">点我试试 3</div>
+			<div class="demo-click">点我试试 4</div>
+			<div class="demo-click">点我试试 5</div>
+		</body>
+		 <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		 <script type="text/javascript">
+		 	//获取类名为demo-click的所有元素
+		 	var objects = $(".demo-click");
+		 	var target;
+		 	for(var i = 0; i < objects.length; i++){
+		 		target = objects[i];
+		 		if(target){
+		 			//注意target和$(target)的区别，其实就是dom原生对象和jQuery对象的区别
+		 			$(target).bind("click",{index:i},clickHandler);
+		 		}
+		 	}
+		 	//元素点击事件处理函数
+		 	function clickHandler(evt){
+		 		//通过evt.data.index获得对应的元素索引
+		 		console.log(evt.data.index);
+		 	}
+		 </script>
+	</html>
+	
+
+
+
 	
