@@ -3,7 +3,18 @@
 ## 说明
 
 本文档中主要总结了日常开发中与Javascript相关的一些实现方法、遇到的常见问题及解决方法或思路、以及其他开发技巧等。
->1.关于微信分享，根据程序中产生的不同的结果，实现分享出不同的转发结果。
+
+## 目录
+
+1. [微信动态生成分享话术](#weixindongtaishengchengfenxianghuashu)
+2. [时间戳格式化](#shijianchuohuoqushijian)
+3. [jQuery中ajax向服务器发送/请求数据](#jq_ajax_get_post_data)
+4. [URL字符串编码/解码](#url_string_format)
+5. [jQuery对html元素循环添加事件](#jq_add_events)
+
+<h5 id="weixindongtaishengchengfenxianghuashu">微信动态生成分享话术</h5>
+
+> 关于微信分享，根据程序中产生的不同的结果，实现分享出不同的转发结果。
 
 解决方法：可参考如下示例。
 	
@@ -52,10 +63,12 @@
 	var imgURL = getImgURL();
 	//设置分享结果，并不局限于只在初始化微信分享时设置相关的分享内容，可以在任意处设置需要分享的标题、内容、URL、图片等等。
 	shareConfig(title,desc,shareURL,imgURL);
-	
+
 _tip:使用此方法设置分享内容时，务必保证已经实现微信分享接口所需要的其他步骤，此处并不介绍如何正常设置微信分享内容的相关方法。_
 
->2.由时间戳获取现实时间字符串方法。
+<h5 id="shijianchuohuoqushijian">时间戳格式化</h5>
+
+>由时间戳获取现实时间字符串方法。
 
 解决方法如下：
 
@@ -93,7 +106,7 @@ _tip:使用此方法设置分享内容时，务必保证已经实现微信分享
 	}
 		
 
->3.使用jQuery中ajax向服务器发送/请求数据。
+<h5 id="jq_ajax_get_post_data">使用jQuery中ajax向服务器发送/请求数据</h5>
 
 解决方法如下：
 
@@ -134,7 +147,9 @@ _tip:使用此方法设置分享内容时，务必保证已经实现微信分享
 	* "text": 返回纯文本字符串
 * success、error分别表示ajax的响应服务器的成功和错误对应事件。
 
->4.javascript对URL字符串进行编码/解码。
+<h5 id="url_string_format">URL字符串编码/解码</h5>
+
+> javascript对URL字符串进行编码/解码。
 
 只有字母和数字[0-9a-zA-Z]、一些特殊符号“$-_.+!*'(),”[不包括双引号]、以及某些保留字，才可以不经过编码直接用于URL。
 
@@ -175,7 +190,7 @@ _此模块参考如下网站：<br>
 [W3School.com-encodeURIComponent()函数](http://www.w3school.com.cn/jsref/jsref_encodeURIComponent.asp)<br>
 [博客园-JS对URL字符串进行编码/解码分析](http://www.cnblogs.com/liuhongfeng/p/5012570.html?utm_source=tuicool&utm_medium=referral)<br>_
 
->5.使用jQuery对html元素循环添加事件。
+<h5 id="jq_add_events">使用jQuery对html元素循环添加事件</h5>
 
 解决方法如下：
 	
