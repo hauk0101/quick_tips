@@ -11,6 +11,9 @@
 3. [jQuery中ajax向服务器发送/请求数据](#jq_ajax_get_post_data)
 4. [URL字符串编码/解码](#url_string_format)
 5. [jQuery对html元素循环添加事件](#jq_add_events)
+6. [手机类型判断](#手机类型判断)
+7. [返回字符串长度](#返回字符串长度)
+8. [获取url中的参数](#获取url中的参数)
 
 <h5 id="weixindongtaishengchengfenxianghuashu">微信动态生成分享话术</h5>
 
@@ -228,7 +231,47 @@ _此模块参考如下网站：<br>
 		 </script>
 	</html>
 	
+<h5 id="手机类型判断">手机类型判断</h5>
 
+```
+var BrowserInfo = {
+	userAgent:navigator.userAgent.toLowerCase(),
+	isAndroid:Boolean(navigator.userAgent.match(/android/ig)),
+	isIphone:Boolean(navigator.userAgent.match(/iphone|ipod/ig)),
+	isIpad:Boolean(navigator.userAgent.match(/ipad/ig)),
+	isWeiXin:Boolean(navigator.userAgent.match(/MicroMessage/ig))
+}
 
+```
+
+<h5 id="返回字符串长度">返回字符串长度,汉字计数为2</h5>
+
+```
+function strLength(str){
+	var _total = 0;
+	for(var i = 0; i < str.length;i++){
+		if(str.charCodeAt(i) > 255){
+			_total += 2; //大于255时，视为汉字
+		}else{
+			_total ++;
+		}	
+	}
+	return _total;
+}
+
+```
+
+<h5 id="获取url中的参数">获取url中的参数</h5>
+
+```
+function GetQueryStringRegExp(name,url){
+	var reg = new RegExp("(^|\?|&)" + name + "=([^&]*)(\s|&|$)", "i");
+	if(reg.test(url)){
+		return decodeURIComponent(RegExp.$2.replace(/+/g, " "));
+	}
+	return "";
+}
+
+```
 
 	
