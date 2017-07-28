@@ -360,5 +360,3 @@ if (String && String.prototype) {
 return javascriptVersion;
 }　　
 ```
-
-<>
