@@ -14,6 +14,9 @@
 6. [手机类型判断](#手机类型判断)
 7. [返回字符串长度](#返回字符串长度)
 8. [获取url中的参数](#获取url中的参数)
+9. [js事件绑定器（兼容低版本IE）](#js事件绑定器)
+10. [js移除事件器（兼容低版本IE）](#js移除事件器)
+11. [获取当前浏览器JS的版本](#获取JS版本)
 
 <h5 id="weixindongtaishengchengfenxianghuashu">微信动态生成分享话术</h5>
 
@@ -273,5 +276,89 @@ function GetQueryStringRegExp(name,url){
 }
 
 ```
+<h5 id="js事件绑定器">js事件绑定器（兼容低版本IE）</h5>
 
-	
+```
+function eventBind(obj, eventType, callBack) {
+  if (obj.addEventListener) {
+      obj.addEventListener(eventType, callBack, false);
+  }
+  else if (window.attachEvent) {
+      obj.attachEvent('on' + eventType, callBack);
+  }
+  else {
+      obj['on' + eventType] = callBack;
+  }
+};
+eventBind(document, 'click', bodyClick);
+```
+
+<h5 id="js移除事件器">js移除事件器（兼容低版本IE）</h5>
+
+```
+this.moveBind = function (objId, eventType, callBack) {
+var obj = document.getElementById(objId);
+	if (obj.removeEventListener) {
+	   obj.removeEventListener(eventType, callBack, false);
+	}
+	else if (window.detachEvent) {
+	   obj.detachEvent('on' + eventType, callBack);
+	}
+	else {
+	   obj['on' + eventType] = null;
+	}
+}　
+```
+
+
+<h5 id="获取JS版本">获取当前浏览器JS的版本</h5>
+
+```
+function getjsversion(){
+var n = navigator;
+var u = n.userAgent;
+var apn = n.appName;
+var v = n.appVersion;
+var ie = v.indexOf('MSIE ');
+if (ie > 0){
+  apv = parseInt(i = v.substring(ie + 5));
+  if (apv > 3) {
+      apv = parseFloat(i);
+  }
+} else {
+  apv = parseFloat(v);
+}
+var isie = (apn == 'Microsoft Internet Explorer');
+var ismac = (u.indexOf('Mac') >= 0);
+var javascriptVersion = "1.0";
+if (String && String.prototype) {
+  javascriptVersion = '1.1';
+  if (javascriptVersion.match) {
+      javascriptVersion = '1.2';
+      var tm = new Date;
+      if (tm.setUTCDate) {
+          javascriptVersion = '1.3';
+          if (isie && ismac && apv >= 5) javascriptVersion = '1.4';
+          var pn = 0;
+          if (pn.toPrecision) {
+              javascriptVersion = '1.5';
+              a = new Array;
+              if (a.forEach) {
+                  javascriptVersion = '1.6';
+                  i = 0;
+                  o = new Object;
+                  tcf = new Function('o', 'var e,i=0;try{i=new Iterator(o)}catch(e){}return i');
+                  i = tcf(o);
+                  if (i && i.next) {
+                      javascriptVersion = '1.7';
+                  }
+              }
+          }
+      }
+  }
+}
+return javascriptVersion;
+}　　
+```
+
+<>
